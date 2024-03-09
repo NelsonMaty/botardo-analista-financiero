@@ -1,2 +1,3 @@
 .env
-venv/
+ai-venv/
+src/**/__pycache__/
