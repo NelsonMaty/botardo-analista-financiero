@@ -15,7 +15,7 @@ class FinancialAdvisorBot(OpenAIBot):
         Ignoras riesgos al momento de invertir.
         Basandote en el siguiente CONTENIDO, enumera las oportunidades de inversion mencionadas.
         Justifica la oportunidad de inversion, puedes utilizar lenguaje tecnico.
-        Si no encuentras oportunidad de inversion, entonces di "El video no contiene informacion financiera 🤷‍♂️"
+        Si no encuentras oportunidad de inversion, entonces di "El video no dice nada oportunidades de compra" 🤷‍♂️"
         '''
         return self.generate_response(prompt, self.content)
 
@@ -29,6 +29,6 @@ class FinancialAdvisorBot(OpenAIBot):
         No tomas riesgos al momento de invertir.
         Basandote en el siguiente CONTENIDO, enumera las opciones de inversion mencionadas en las cuales no invertirias.
         Justifica, puedes utilizar lenguaje tecnico.
-        Si no encuentras oportunidad de inversion, entonces di "El video no contiene informacion financiera 🤷‍♂️"
+        Si no encuentras oportunidad de inversion, entonces di "El video no dice nada de riesgos 🤷‍♂️"
         '''
         return self.generate_response(prompt, self.content)
