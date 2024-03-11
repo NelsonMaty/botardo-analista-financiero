@@ -9,7 +9,7 @@ class OpenAIBot:
     def generate_response(self, system_message='', user_message=''):
         result = self.bot.create(
             model="gpt-3.5-turbo",
-            temperature=0.1,
+            temperature=0,
             messages=[
                 {"role": "system", "content": system_message},
                 {"role": "user", "content": user_message}
