@@ -5,30 +5,37 @@ class FinancialAdvisorBot(OpenAIBot):
         super().__init__()
         self.content = content
 
-    def generate_optimist_recommendation(self):
+    def generate_analysis(self):
         prompt = '''
         Hablas español.
         Eres un buen asesor financiero.
-        Tienes 20 años de experiencia en el mercado de bonos y acciones argentino.
-        Tienes 20 años de experiencia en el mercado de bonos y acciones americano e internacional.
-        Eres optimista.
-        Ignoras riesgos al momento de invertir.
-        Basandote en el siguiente CONTENIDO, enumera las oportunidades de inversion mencionadas.
-        Justifica la oportunidad de inversion, puedes utilizar lenguaje tecnico.
-        Si no encuentras oportunidad de inversion, entonces di "El video no dice nada oportunidades de compra" 🤷‍♂️"
-        '''
-        return self.generate_response(prompt, self.content)
+        Eres bueno identificando oportunidades de inversion y riesgos de inversion.
+        Sabes expresarte usando jerga tecnica.
+        Basandote en el siguiente CONTENIDO, tu tarea es extraer informacion.
+        Primero, describe el contexto economico del mercado actual, junto a expectativas futuras.
+        Luego, para todos los instrumentos de inversion mencionados en el CONTENIDO, elabora una respuesta donde se listen las razones para invertir y para no invertir en el activo.
+        Asegurate de separarar los activos con el delimitador: END_OF_MESSAGE
+        Nótese que puedes agregar o quitar subpuntos consideres necesario para presentar la información de manera clara, sin redundar en subpuntos.
+        EVITA INCLUIR UN RESUMEN AL FINAL DEL TEXTO.
+        El patron de respuesta debe ser el siguiente:
+        🌐 Contexto economico
 
-    def generate_pesimist_recommendation(self):
-        prompt = '''
-        Hablas español.
-        Eres un buen asesor financiero.
-        Tienes 20 años de experiencia en el mercado de bonos y acciones argentino.
-        Tienes 20 años de experiencia en el mercado de bonos y acciones americano e internacional.
-        Eres pesimista.
-        No tomas riesgos al momento de invertir.
-        Basandote en el siguiente CONTENIDO, enumera las opciones de inversion mencionadas en las cuales no invertirias.
-        Justifica, puedes utilizar lenguaje tecnico.
-        Si no encuentras oportunidad de inversion, entonces di "El video no dice nada de riesgos 🤷‍♂️"
+        {contexto economico}
+
+        END_OF_MESSAGE
+
+        💰{NOMBRE DEL ACTIVO ESPECIFICO EN MAYUSCULAS (si hay ejemplos, incluirlos aqui entre prarentensis)}
+
+        🟢 Por que es una buena inversion? 
+         - {subpunto explicando en menos de 10 palabras porque seria una buena decision invertir en este momento en dicho activo basandonse en el CONTENIDO}  
+         - {subpunto explicando en menos de 10 palabras porque seria una buena decision invertir en este momento en dicho activo basandonse en el CONTENIDO}  
+         ... 
+        ⚠️ Por que no es una buena inversion en este momento? 
+         - {bullet explicando en menos de 10 porque seria una mala decision invertir en este momento en dicho activo basandonse en el CONTENIDO}  
+         - {bullet explicando en menos de 10 porque seria una mala decision invertir en este momento en dicho activo basandonse en el CONTENIDO}  
+         ...
+         END_OF_MESSAGE
         '''
-        return self.generate_response(prompt, self.content)
+        result = self.generate_response(prompt, self.content)
+        result = result.split('END_OF_MESSAGE')[:-1]
+        return result

@@ -16,11 +16,13 @@ async def help_command(update, context):
     await update.message.reply_text("Pasame un link de youtube y yo te lo analizo wachooo")
 
 async def analyze_content(update, context):
-    message = update.message.text
-    transcript = get_transcript_for_video(message)
+    received_message = update.message.text
+    transcript = get_transcript_for_video(received_message)
     bot = FinancialAdvisorBot(transcript)
-    await update.message.reply_text(bot.generate_optimist_recommendation())
-    await update.message.reply_text(bot.generate_pesimist_recommendation())
+    await update.message.reply_text('Analizando... 🤔')
+    messages = bot.generate_analysis()
+    for message in messages:
+        await update.message.reply_text(message)
 
 def main():
     load_dotenv()
