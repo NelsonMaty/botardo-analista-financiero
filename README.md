@@ -20,6 +20,8 @@ Run the following command to clone the repository and install the bot:
 ```bash
 git clone https://github.com/your-username/project-name.git
 cd project-name
+python3 -m venv env
+source env/bin/activate
 pip install -r requirements.txt
 touch .env # edit this file with your API keys
 python3 src/main.py
