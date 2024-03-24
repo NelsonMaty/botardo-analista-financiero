@@ -8,13 +8,16 @@ class FinancialAdvisorBot(OpenAIBot):
     def generate_analysis(self):
         prompt = '''
         Hablas español.
-        Basandote en el siguiente CONTENIDO, tu tarea es extraer informacion precisa acerca de oportunidades y riesgos de inversion.
-        Primero, describe el contexto economico del mercado actual, junto a expectativas futuras.
-        Luego, enumera todos los nombres de activos de inversion mencionados en el CONTENIDO.
-        Siguiente, para cada uno de esos nombres de activos de inversion elabora hasta dos parrafos. 
-        El primer parrafo lista las razones para invertir en el instrumento. 
-        El segundo parrafo lista las razones para no invertir en el instrumento.
-        Asegurate de separarar los activos con el delimitador: END_OF_MESSAGE
+        Eres un asesor financiero. 
+        Sabes de analisis tecnico. 
+        Sabes de analisis fundamental. 
+        Puedes expresarte de manera tecnica y precisa. 
+        Tu publico son analistas financieros interesados en oportunidades y riesgos de enversion mencionadas en el CONTENIDO.
+        Tu objetivo es listar tantos instrumentos financieros como te sean posibles presentes en el CONTENIDO.
+        Primero, describe el contexto economico del mercado actual, junto a expectativas futuras. Luego, enumera los activos de inversion mencionados en el CONTENIDO. Esto puede ser el nombre de un indice, una accion, un bono, una criptomoneda o inversiones a plazo fijo. 
+        Siguiente, para cada uno de esos activos de inversion desarrolla lo siguiente. Un parrafo con el listado de los motivos mencionados en el CONTENIDO para invertir en el activo. Si no existen dichos motivos, no escribas nada.
+        Un parrafo con el listado de los motivos mencionados en el CONTENIDO para no invertir en el activo. Si no existen dichos motivos, no escribas nada.
+        Luego, asegurate de separarar los activos con el delimitador: END_OF_MESSAGE
         Nótese que puedes agregar o quitar items en los listados como necesites para presentar la información completa.
         Evita incluir un resumen al final del texto.
         El patron de respuesta debe ser el siguiente:
@@ -24,14 +27,18 @@ class FinancialAdvisorBot(OpenAIBot):
 
         END_OF_MESSAGE
 
-        💰{NOMBRE DEL ACTIVO ESPECIFICO EN MAYUSCULAS (si hay ejemplos, incluirlos aqui entre prarentensis)}
+        💰{El nombre de un indice/accion/bono/criptomoneda/inversion a plazo fijo/instrumento de inversion.}
 
+        (El siguiente parrafo puede omitirse si no se menciona en el CONTENIDO ningun motivo para invertir en dicha activo)
         🟢 Por que es una buena inversion? 
          - {item de listado explicando en menos de 10 palabras porque seria una buena decision invertir en este momento en dicho activo basandonse en el CONTENIDO}
-         ... 
+         ...
+
+        (El siguient parrafo puede omitirse si no se menciona en el CONTENIDO ningun motivo para no invertir en dicho activo)
         ⚠️ Por que no es una buena inversion en este momento? 
          - {item de listado explicando en menos de 10 palabras porque seria una mala decision invertir en este momento en dicho activo basandonse en el CONTENIDO}
          ...
+
          END_OF_MESSAGE
         '''
         result = self.generate_response(prompt, self.content)
