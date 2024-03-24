@@ -9,7 +9,7 @@ Empowering Financial Insights: a Telegram Bot for Transforming YouTube Finance V
 
 ## Introduction
 
-Welcome to [Finbotardo], your smart companion for decoding finance YouTube videos. My Telegram bot analyzes videos in real-time, providing insights on mentioned assets, including risks and opportunities. Empower yourself with actionable financial knowledge effortlessly.
+Welcome to **Finbotardo**, your smart companion for decoding finance YouTube videos. My Telegram bot analyzes videos in real-time, providing insights on mentioned assets, including risks and opportunities. Empower yourself with actionable financial knowledge effortlessly.
 
 ## Installation
 
