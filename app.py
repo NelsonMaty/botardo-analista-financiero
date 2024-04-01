@@ -1,5 +1,5 @@
-from data_extractors.FromYoutube import get_transcript_for_video 
-from bots.FinancialAdvisorBot import FinancialAdvisorBot
+from src.data_extractors.FromYoutube import get_transcript_for_video 
+from src.bots.FinancialAdvisorBot import FinancialAdvisorBot
 from dotenv import load_dotenv
 from flask import Flask, request
 import os
