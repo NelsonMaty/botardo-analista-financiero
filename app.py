@@ -1,3 +1,5 @@
+from data_extractors.FromYoutube import get_transcript_for_video 
+from bots.FinancialAdvisorBot import FinancialAdvisorBot
 from dotenv import load_dotenv
 from flask import Flask, request
 import os
@@ -11,16 +13,24 @@ TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/"
 @app.route(f'/{TELEGRAM_API_KEY}', methods=['POST'])
 def respond():
     reply = None
-    chat_id = request.json['message']['chat']['id']
-    text = request.json['message']['text']
+    message = request.json['message']
+    chat_id = message['chat']['id']
+    text = message['text']
 
     if (text == '/start'):
-        reply = 'Hola ' + request.json["message"]["from"]["first_name"] + '! 👋'
+        reply = 'Hola ' + message["from"]["first_name"] + '! 👋'
     else:
-        reply = text # echo by default
+        transcript = get_transcript_for_video(received_message)
+        bot = FinancialAdvisorBot(transcript)
+        reply_message(chat_id, 'Analizando... 🤔')
+        messages = bot.generate_analysis()
+        for message in messages:
+            reply_message(chat_id, message)
 
-    response = requests.post(TELEGRAM_API_URL + 'sendMessage', {
-        'chat_id': chat_id,
-        'text': text
-    })
     return '', 200
+
+def reply_message(chat_id, message):
+    requests.post(TELEGRAM_API_URL + 'sendMessage', {
+        'chat_id': chat_id,
+        'text': reply
+    })
