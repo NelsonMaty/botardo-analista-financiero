@@ -10,17 +10,17 @@ TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/"
 
 @app.route(f'/{TELEGRAM_API_KEY}', methods=['POST'])
 def respond():
-    update = request.json
-    chat_id = update['message']['chat']['id']
-    text = update['message']['text']
-    send_message(chat_id, text)
-    return '', 200
+    reply = None
+    chat_id = request.json['message']['chat']['id']
+    text = request.json['message']['text']
 
+    if (text == '/start'):
+        reply = 'Hi there! I am a bot. Try me!
+    else:
+        reply = text # echo by default
 
-def send_message(chat_id, text):
-    data = {
+    response = requests.post(TELEGRAM_API_URL + 'sendMessage', {
         'chat_id': chat_id,
         'text': text
-    }
-    response = requests.post(TELEGRAM_API_URL + 'sendMessage', data=data)
-    return response.json()
+    })
+    return '', 200
