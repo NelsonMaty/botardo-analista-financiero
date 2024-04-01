@@ -15,7 +15,7 @@ def respond():
     text = request.json['message']['text']
 
     if (text == '/start'):
-        reply = 'Hola ' + request.json["message"]["from"]["username"] + '! 👋'
+        reply = 'Hola ' + request.json["message"]["from"]["first_name"] + '! 👋'
     else:
         reply = text # echo by default
 
