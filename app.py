@@ -20,7 +20,7 @@ def respond():
     if (text == '/start'):
         reply = 'Hola ' + message["from"]["first_name"] + '! 👋'
     else:
-        transcript = get_transcript_for_video(received_message)
+        transcript = get_transcript_for_video(text)
         bot = FinancialAdvisorBot(transcript)
         reply_message(chat_id, 'Analizando... 🤔')
         messages = bot.generate_analysis()
@@ -32,5 +32,5 @@ def respond():
 def reply_message(chat_id, message):
     requests.post(TELEGRAM_API_URL + 'sendMessage', {
         'chat_id': chat_id,
-        'text': reply
+        'text': message 
     })
