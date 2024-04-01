@@ -1,9 +1,8 @@
-from bots.FinancialAdvisorBot import FinancialAdvisorBot
-from data_extractors.FromYoutube import get_transcript_for_video 
-from dotenv import load_dotenv
-from flask import Flask
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
+from dotenv import load_dotenv
+from bots.FinancialAdvisorBot import FinancialAdvisorBot
+from data_extractors.FromYoutube import get_transcript_for_video 
 import os
 
 async def start(update, context):
@@ -37,4 +36,5 @@ def main():
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
-app = Flask(__name__)
+if __name__ == "__main__":
+    main()
