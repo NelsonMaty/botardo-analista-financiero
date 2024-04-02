@@ -18,7 +18,7 @@ def respond():
 
     if (text == '/start'):
         name = message["from"]["first_name"]
-        reply = 'Hola ' + name + '! 👋'
+        reply = 'Hola ' + name + '! 👋 \n Compartime un video de YouTube para que te ayude a obtener un análisis financiero.'
         reply_message(chat_id, reply)
     else:
         reply_message(chat_id, 'Analizando... 🤔')
