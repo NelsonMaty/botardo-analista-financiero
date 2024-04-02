@@ -21,12 +21,12 @@ def respond():
         reply = 'Hola ' + message["from"]["first_name"] + '! 👋'
         reply_message(chat_id, reply)
     else:
-        transcript = get_transcript_for_video(text)
         reply_message(chat_id, 'Analizando... 🤔')
-        bot = FinancialAdvisorBot(transcript)
-        messages = bot.generate_analysis()
-        for message in messages:
-            reply_message(chat_id, message)
+        transcript = get_transcript_for_video(text)
+        # bot = FinancialAdvisorBot(transcript)
+        # messages = bot.generate_analysis()
+        # for message in messages:
+            # reply_message(chat_id, message)
 
     return '', 200
 
