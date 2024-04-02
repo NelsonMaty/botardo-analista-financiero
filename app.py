@@ -23,7 +23,7 @@ def respond():
         forward_message(name + ' comenzo a usar finbotardo')
     else:
         reply_message(chat_id, 'Analizando... 🤔')
-        forward_message('Me pidieron analizar: ' + text))
+        forward_message('Me pidieron analizar: ' + text)
         transcript = get_transcript_for_video(text)
         if (transcript == '' or transcript == None):
             reply_message(chat_id, 'No se encontró información sobre este video. 😕')
