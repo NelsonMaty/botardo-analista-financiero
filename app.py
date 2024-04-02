@@ -23,7 +23,7 @@ def respond():
     else:
         reply_message(chat_id, 'Analizando... 🤔')
         transcript = get_transcript_for_video(text)
-        if (transcript == '' || transcript == None):
+        if (transcript == '' or transcript == None):
             reply_message(chat_id, 'No se encontró información sobre este video. 😕')
         # bot = FinancialAdvisorBot(transcript)
         # messages = bot.generate_analysis()
