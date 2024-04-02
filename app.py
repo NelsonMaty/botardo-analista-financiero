@@ -22,7 +22,7 @@ def respond():
         reply_message(chat_id, reply)
     else:
         reply_message(chat_id, 'Analizando... 🤔')
-        transcript = get_transcript_for_video(text)
+        # transcript = get_transcript_for_video(text)
         # bot = FinancialAdvisorBot(transcript)
         # messages = bot.generate_analysis()
         # for message in messages:
