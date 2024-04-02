@@ -19,7 +19,7 @@ def respond():
     if (text == '/start'):
         reply = 'Hola ' + message["from"]["first_name"] + '! 👋'
         reply_message(chat_id, reply)
-        print('este es el chat iddddddddd ' + chat_id)
+        print('este es el chat iddddddddd ' + str(chat_id))
     else:
         reply_message(chat_id, 'Analizando... 🤔')
         transcript = get_transcript_for_video(text)
