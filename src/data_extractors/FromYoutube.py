@@ -19,6 +19,10 @@ def __get_transcript_from_id(video_id):
     return result
 
 def get_transcript_for_video(url):
+    result = None
     video_id = __get_video_id(url)
-    result = __get_transcript_from_id(video_id)
+    if video_id is None:
+        result = None
+    else:
+        result = __get_transcript_from_id(video_id)
     return result

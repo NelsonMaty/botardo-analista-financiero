@@ -12,7 +12,6 @@ TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/"
 
 @app.route(f'/{TELEGRAM_API_KEY}', methods=['POST'])
 def respond():
-    reply = None
     message = request.json['message']
     chat_id = message['chat']['id']
     text = message['text']
@@ -20,9 +19,12 @@ def respond():
     if (text == '/start'):
         reply = 'Hola ' + message["from"]["first_name"] + '! 👋'
         reply_message(chat_id, reply)
+        print('este es el chat iddddddddd ' + chat_id)
     else:
         reply_message(chat_id, 'Analizando... 🤔')
-        # transcript = get_transcript_for_video(text)
+        transcript = get_transcript_for_video(text)
+        if (transcript == '' || transcript == None):
+            reply_message(chat_id, 'No se encontró información sobre este video. 😕')
         # bot = FinancialAdvisorBot(transcript)
         # messages = bot.generate_analysis()
         # for message in messages:
