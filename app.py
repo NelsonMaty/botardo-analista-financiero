@@ -20,10 +20,8 @@ def respond():
         name = message["from"]["first_name"]
         reply = 'Hola ' + name + '! 👋'
         reply_message(chat_id, reply)
-        forward_message(name + ' comenzo a usar finbotardo')
     else:
         reply_message(chat_id, 'Analizando... 🤔')
-        forward_message('Me pidieron analizar: ' + text)
         transcript = get_transcript_for_video(text)
         if (transcript == '' or transcript == None):
             reply_message(chat_id, 'No se encontró información sobre este video. 😕')
@@ -36,11 +34,5 @@ def respond():
 def reply_message(chat_id, message):
     requests.post(TELEGRAM_API_URL + 'sendMessage', {
         'chat_id': chat_id,
-        'text': message 
-    })
-
-def forward_message(message):
-    requests.post(TELEGRAM_API_URL + 'sendMessage', {
-        'chat_id': MY_TELEGRAM_CHAT_ID,
         'text': message 
     })
